@@ -1,3 +1,4 @@
+import * as postApi from "@/api/postApi";
 import { PostData } from "@/types/post";
 import { getData } from "@/utils/local-storage";
 import { router } from "expo-router";
@@ -15,8 +16,14 @@ export default function PostsMap() {
     }
   };
 
+  async function getPostsFromApi() {
+      const posts = await postApi.getAllPosts();
+      setPosts(posts);
+    }
+
   useEffect(() => {
-    getPostsFromLocal();
+    // getPostsFromLocal();
+    getPostsFromApi();
   }, []);
 
   return (
